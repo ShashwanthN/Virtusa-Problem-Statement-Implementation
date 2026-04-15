@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtusa Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Virtusa Assessment</h1>
+        <p>Proof of concept for job creation, resume matching, and quiz-based applications.</p>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" id="nav-match" type="button" onclick="nav('sec-match-jobs', this)">Match</button>
+        <button class="nav-btn" id="nav-all" type="button" onclick="nav('sec-all-jobs', this); loadAllJobs()">Jobs</button>
+        <button class="nav-btn" id="nav-create" type="button" onclick="nav('sec-create-job', this)">Create</button>
+    </nav>
+
+    <main>
+        <section id="sec-match-jobs" class="view-section">
+            <div class="card">
+                <h2>Resume Match</h2>
+                <form id="match-resume-form" class="stack">
+                    <label>
+                        Resume PDF
+                        <input type="file" id="apply-resume" accept="application/pdf" required>
+                    </label>
+                    <button type="submit" id="match-btn">Upload and Find Matches</button>
+                </form>
+                <div id="matched-jobs-container" class="stack section-block"></div>
+                <div id="match-analysis-container" class="card section-block hidden"></div>
+            </div>
+        </section>
+
+        <section id="sec-all-jobs" class="view-section hidden">
+            <div class="card">
+                <div class="section-row">
+                    <h2>All Jobs</h2>
+                    <button type="button" onclick="loadAllJobs()">Refresh</button>
+                </div>
+                <div id="all-jobs-container" class="stack section-block"></div>
+            </div>
+        </section>
+
+        <section id="sec-create-job" class="view-section hidden">
+            <div class="card">
+                <h2>Create Job</h2>
+
+                <div id="wizard-step-1">
+                    <form id="job-details-form" class="form-grid">
+                        <label>
+                            Title
+                            <input type="text" id="j-title" required>
+                        </label>
+                        <label>
+                            Skills Needed
+                            <input type="text" id="j-skills" placeholder="Java, Spring Boot, SQL" required>
+                        </label>
+                        <label class="full-width">
+                            Description
+                            <textarea id="j-desc" rows="4" required></textarea>
+                        </label>
+                        <label>
+                            Min Experience
+                            <input type="number" id="j-exp" value="2" min="0" required>
+                        </label>
+                        <label>
+                            Employment Type
+                            <input type="text" id="j-etype" value="FT" required>
+                        </label>
+                        <label>
+                            Company ID
+                            <input type="text" id="j-cid" required>
+                        </label>
+                        <label>
+                            Company Name
+                            <input type="text" id="j-cname" required>
+                        </label>
+                        <label>
+                            Location
+                            <input type="text" id="j-loc" value="Remote" required>
+                        </label>
+                        <label>
+                            Minimum Salary
+                            <input type="number" id="j-minsal" value="50000" min="0" required>
+                        </label>
+                        <label>
+                            Maximum Salary
+                            <input type="number" id="j-maxsal" value="100000" min="0" required>
+                        </label>
+                        <div class="full-width">
+                            <button type="submit">Next</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="wizard-step-2" class="hidden stack">
+                    <div class="form-grid">
+                        <label>
+                            Test Duration (Minutes)
+                            <input type="number" id="q-time" value="30" min="1" required>
+                        </label>
+                        <label>
+                            Required Correct Answers
+                            <input type="number" id="required-correct-answers" value="1" min="1" required>
+                        </label>
+                        <label>
+                            AI Question Count
+                            <input type="number" id="ai-qnum" value="5" min="1">
+                        </label>
+                    </div>
+
+                    <div class="section-row">
+                        <button type="button" id="ai-generate-btn" onclick="generateAiQuiz()">Generate Questions</button>
+                        <button type="button" onclick="addBlankQuestion()">Add Question</button>
+                    </div>
+
+                    <div id="manual-questions-container" class="stack"></div>
+
+                    <div class="section-row">
+                        <button type="button" onclick="backToJobDetails()">Back</button>
+                        <button type="button" id="save-job-btn" onclick="finalizeJob()">Save Job</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-take-test" class="view-section hidden">
+            <div class="card">
+                <div class="section-row">
+                    <button type="button" onclick="navBack()">Back</button>
+                    <h2 id="test-job-title">Application</h2>
+                </div>
+                <p>Time limit: <span id="test-time-limit">0</span> minutes</p>
+                <p>Required correct answers: <span id="test-pass-threshold">0</span></p>
+
+                <form id="submit-test-form" class="stack">
+                    <div id="questions-list" class="stack"></div>
+                    <button type="submit" id="submit-test-btn">Submit Test</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

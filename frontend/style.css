@@ -1,0 +1,109 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 16px;
+    line-height: 1.4;
+}
+
+header,
+nav,
+main,
+section,
+div,
+form,
+label,
+input,
+textarea,
+button {
+    box-sizing: border-box;
+}
+
+header,
+main {
+    max-width: 960px;
+    margin: 0 auto 16px;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 960px;
+    margin: 0 auto 16px;
+}
+
+.card,
+.list-item,
+.q-block,
+.question-item {
+    border: 1px solid #ccc;
+    padding: 16px;
+}
+
+.card + .card,
+.list-item + .list-item,
+.q-block + .q-block,
+.question-item + .question-item {
+    margin-top: 12px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.stack {
+    display: grid;
+    gap: 12px;
+}
+
+.section-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.section-block {
+    margin-top: 16px;
+}
+
+.section-row button {
+    width: auto;
+}
+
+label {
+    display: block;
+}
+
+input,
+textarea,
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.nav-btn {
+    width: auto;
+}
+
+.nav-btn.active {
+    font-weight: 700;
+    border: 2px solid #000;
+}
+
+.hidden {
+    display: none;
+}
